@@ -121,19 +121,19 @@ time2string:
 					# NBCD-coded digit (seconds)
 					
 	# Save necessery overwritten constants.
-	move	$t4, $a0		# $t4 = memory address for time2string output
-	move	$t5, $ra		# $t5 = return address to main
+	move	$t4, $a0	# $t4 = memory address for time2string output
+	PUSH	($ra)		# push return address to main to stack
+	PUSH	($t1)		# push NBCD-coded minutes digit to stack
 	
 	# Convert NBCD-coded minutes/seconds to ASCII-coded digits.
 	# Arrange ASCII-coded minutes/seconds into the above specified sequence of
 	# characters in the area of memory pointed to by $t4 = $a0.
 	move 	$a0, $t0	# a0 = NBCD-coded tens of minutes digit
-	PUSH	($t1)
 	jal	hexasc		# $v0 = ASCII-coded tens of minutes digit
 	nop
 	sb	$v0, 0($t4)	# store 8 least significant bits of $v0 at mem[reg($t4)]
 	
-	POP	($t1)
+	POP	($t1)		# $t1 = NBCD-coded minutes digit
 	move	$a0, $t1	# $a0 = NBCD-coded minutes digit
 	jal	hexasc		# $v0 = ASCII-coded minutes digit
 	nop
@@ -159,4 +159,5 @@ time2string:
 	li	$t6, 0x00	# $t6 = ASCII-code for NUL
 	sb	$t6, 5($t4)	
 	
-	jr	$t5
+	POP	($ra)		# $ra = return address to main
+	jr	$ra
