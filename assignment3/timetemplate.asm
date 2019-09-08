@@ -87,14 +87,17 @@ hexasc:
 	
 	addi 	$v0, $a0, 0x30		# convert $a0 to ascii code for 0-9
 	jr 	$ra				
+	nop
 
 gt9:
 	addi $v0, $a0, 0x37		# convert $a0 to ascii code for A-F
 	jr $ra
+  	nop
   
 delay:
 	sgt	$t2, $a0, $0		# $t2 = $a0 > $0 ? 1 : 0
 	beqz	$t2, end_delay		# if ($t2 == 0) branch to end_delay
+	nop
 	subi	$a0, $a0, 1		# $a0 -= 1
 
 	li	$s0, 0			# $s0 = 0
@@ -102,10 +105,12 @@ delay:
 delay_loop:	
 	slt	$t1, $s0, $t0		# $t1 = $s0 < $t0 ? 1 : 0
 	beqz	$t1, end_delay_loop	# if ($t1 == 0) branch to end_delay_loop
+	nop
 	addi	$s0, $s0, 1		# $s0 += 1		
 	j	delay_loop
 end_delay_loop:
 	j	delay
+	nop
 end_delay:
 	jr	$ra			# return
 	nop
@@ -175,3 +180,4 @@ time2string:
 	
 	POP	($ra)		# $ra = return address to main
 	jr	$ra
+	nop
