@@ -24,8 +24,8 @@ main:
 	syscall
 	nop
 	# wait a little
-	li	$a0,2
-	jal	delay
+	li	$a0, 1000	# $a0 = 1000
+	jal	delay		# wait for $a0 ms
 	nop
 	# call tick
 	la	$a0,mytime
@@ -98,7 +98,7 @@ delay:
 	subi	$a0, $a0, 1		# $a0 -= 1
 
 	li	$s0, 0			# $s0 = 0
-	li	$t0, 30272		# $t0 = 30272 (delay constant, 1 tick = 1 s)
+	li	$t0, 50			# $t0 = 26 (delay constant, 1 tick is approx 1 s)
 delay_loop:	
 	slt	$t1, $s0, $t0		# $t1 = $s0 < $t0 ? 1 : 0
 	beqz	$t1, end_delay_loop	# if ($t1 == 0) branch to end_delay_loop

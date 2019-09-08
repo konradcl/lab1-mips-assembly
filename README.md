@@ -108,3 +108,11 @@ are executed, and only once. This is the case because `$t2 = $a0 > $0 = 0 > 0` e
 
 - For `reg($a0) = -1` the exact same instructions will be executed because `$t2 = $a0 > $0 = -1 > 0 = 0`. 
 
+
+
+*Note:* There seems to be a lot of variation between sessions for what constant makes the delay loop be 1 s/tick for `$a0 = 1000`.
+
+
+
+### Assignment 5
+
