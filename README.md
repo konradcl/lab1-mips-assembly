@@ -66,17 +66,20 @@ instruction to actually branch to another location? This is called a taken branc
 
 Which registers are saved and restored by your subroutine? Why?
 
-- `time2string` saves and restores `$t1` because `hexasc` uses `$t1`.
-- `time2string` saves and restores `$a0` because `$a0` is used as an argument by `hexasc`.
-- `time2string` saves and restores `$ra` because `$ra` is overwritten by the `jal` instructions. 
+- `$a0` because `$a0` is used as an argument by `hexasc`.
+- `$t1` because `hexasc` uses `$t1`.
+- `$ra` because `$ra` is overwritten by the `jal` instructions. 
 
 
 
 Which registers are used but not saved? Why are these not saved?
 
-- The register `$t0, $t2, $t3`
+- `$t0, $t2, $t3, $t4` are used but not saved because there exist no functions that overwrite them and because, by convention, they are caller-saved, which means that the calling function has the responsibility of saving them if it need them.
 
 
 
-Assume the time is 16:53. Which lines of your code handle the '5'?
+Assume the time is 16:53. Which lines of your code handle the "5"?
+
+- Lines 118-119
+- Lines 147-150
 
