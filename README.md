@@ -48,27 +48,33 @@ instruction to actually branch to another location? This is called a taken branc
 
 `time2string` **contract**
 
-- [ ] Parameter 1: `$a0` – memory address for output of `time2string`
-- [ ] Parameter 2: `$a1` – input time-info
-  - [ ] 16 least significant bits are time-info organized as four NBCD-coded digits (tens of minutes, minutes, tens of seconds, seconds).
-  - [ ] The 16 most significant bits can have any values and must be ignored.
-- [ ] Return value: none
-- [ ] Required action: Write the following six characters to the register pointed to by `$a0`
-  - [ ] Two ASCII-coded digits showing the number of minutes, according to the two more significant NBCD-coded digits of `$a1`.
-  - [ ] A colon character (ASCII code 0x3A).
-  - [ ] Two ASCII-coded digits showing the number of seconds, according to the two less significant NBCD-coded digits of `$a1`.
-  - [ ] A null byte (ASCII code 0x00).
-- [ ] Use `hexasc` to convert each NBCD-coded digit into the corresponding ASCII code.
-- [ ] Use `sb` to store each byte at the destination register.
+- [x] Parameter 1: `$a0` – memory address for output of `time2string`
+- [x] Parameter 2: `$a1` – input time-info
+  - [x] 16 least significant bits are time-info organized as four NBCD-coded digits (tens of minutes, minutes, tens of seconds, seconds).
+  - [x] The 16 most significant bits can have any values and must be ignored.
+- [x] Return value: none
+- [x] Required action: Write the following six characters to the register pointed to by `$a0`
+  - [x] Two ASCII-coded digits showing the number of minutes, according to the two more significant NBCD-coded digits of `$a1`.
+  - [x] A colon character (ASCII code 0x3A).
+  - [x] Two ASCII-coded digits showing the number of seconds, according to the two less significant NBCD-coded digits of `$a1`.
+  - [x] A null byte (ASCII code 0x00).
+- [x] Use `hexasc` to convert each NBCD-coded digit into the corresponding ASCII code.
+- [x] Use `sb` to store each byte at the destination register.
 - [ ] Save and restore registers according to convention.
 
 
 
 Which registers are saved and restored by your subroutine? Why?
 
+- `time2string` saves and restores `$t1` because `hexasc` uses `$t1`.
+- `time2string` saves and restores `$a0` because `$a0` is used as an argument by `hexasc`.
+- `time2string` saves and restores `$ra` because `$ra` is overwritten by the `jal` instructions. 
+
 
 
 Which registers are used but not saved? Why are these not saved?
+
+- The register `$t0, $t2, $t3`
 
 
 

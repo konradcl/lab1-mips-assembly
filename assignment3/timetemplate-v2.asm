@@ -128,12 +128,12 @@ time2string:
 	# Arrange ASCII-coded minutes/seconds into the above specified sequence of
 	# characters in the area of memory pointed to by $t4 = $a0.
 	move 	$a0, $t0	# a0 = NBCD-coded tens of minutes digit
-	#PUSH	($t1)
+	PUSH	($t1)
 	jal	hexasc		# $v0 = ASCII-coded tens of minutes digit
 	nop
 	sb	$v0, 0($t4)	# store 8 least significant bits of $v0 at mem[reg($t4)]
 	
-	#POP	($t1)
+	POP	($t1)
 	move	$a0, $t1	# $a0 = NBCD-coded minutes digit
 	jal	hexasc		# $v0 = ASCII-coded minutes digit
 	nop
