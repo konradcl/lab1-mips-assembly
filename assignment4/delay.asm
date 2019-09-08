@@ -24,8 +24,8 @@ delay:
 	subi	$a0, $a0, 1		# $a0 -= 1
 
 	li	$s0, 0			# $s0 = 0
-	li	$t0, 4711		# $t0 = 4711
-delay_loop:
+	li	$t0, 30272		# $t0 = 30272 (1 delay = 1 s)
+delay_loop:	
 	slt	$t1, $s0, $t0		# $t1 = $s0 < $t0 ? 1 : 0
 	beqz	$t1, end_delay_loop	# if ($t1 == 0) branch to end_delay_loop
 	addi	$s0, $s0, 1		# $s0 += 1		
