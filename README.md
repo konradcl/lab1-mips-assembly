@@ -83,3 +83,28 @@ Assume the time is 16:53. Which lines of your code handle the "5"?
 - Lines 118-119
 - Lines 147-150
 
+
+
+### Assignment 4
+
+If the argument value in register `$a0` is zero, which instructions in your subroutine are
+executed? How many times each? Why?
+
+Only the instructions
+
+```
+delay:
+	slt		$t2, $a0, $0		# $t2 = $a0 < $0 ? 1 : 0
+	beqz	$t2, end_delay		# if ($t2 == 0) branch to end_delay
+	⋮
+end_delay:
+	jr	$ra			# return
+	nop
+```
+
+are executed, and only once. This is the case because `$t2 = $a0 > $0 = 0 > 0` evaluates to `0` , which is stored in `$t2`. In turn, `beqz $t2, end_delay` makes the program branch to `end_delay` because `$t2 == 0`.
+
+<br/>Repeat the previous question for a negative number: -1.
+
+- For `reg($a0) = -1` the exact same instructions will be executed because `$t2 = $a0 > $0 = -1 > 0 = 0`. 
+
