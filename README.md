@@ -42,3 +42,35 @@ instruction to actually branch to another location? This is called a taken branc
 
 - Input values where the four least significant bits represent a value greater than 9 cause the program to take the branch.
 
+
+
+### Assignment 3
+
+`time2string` **contract**
+
+- [ ] Parameter 1: `$a0` – memory address for output of `time2string`
+- [ ] Parameter 2: `$a1` – input time-info
+  - [ ] 16 least significant bits are time-info organized as four NBCD-coded digits (tens of minutes, minutes, tens of seconds, seconds).
+  - [ ] The 16 most significant bits can have any values and must be ignored.
+- [ ] Return value: none
+- [ ] Required action: Write the following six characters to the register pointed to by `$a0`
+  - [ ] Two ASCII-coded digits showing the number of minutes, according to the two more significant NBCD-coded digits of `$a1`.
+  - [ ] A colon character (ASCII code 0x3A).
+  - [ ] Two ASCII-coded digits showing the number of seconds, according to the two less significant NBCD-coded digits of `$a1`.
+  - [ ] A null byte (ASCII code 0x00).
+- [ ] Use `hexasc` to convert each NBCD-coded digit into the corresponding ASCII code.
+- [ ] Use `sb` to store each byte at the destination register.
+- [ ] Save and restore registers according to convention.
+
+
+
+Which registers are saved and restored by your subroutine? Why?
+
+
+
+Which registers are used but not saved? Why are these not saved?
+
+
+
+Assume the time is 16:53. Which lines of your code handle the '5'?
+

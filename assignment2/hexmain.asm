@@ -17,6 +17,9 @@ main:
 	li	$v0, 10		# system exit code
 	syscall			# terminates execution, no garbage memory will be executed
 
+# Returns an ASCII code to $v0 for one of the characters 0-9 or A-F based on the value of
+# the four least significant bits of $a0. The mapping between the value of the four least
+# significant digits of $a0 and the characters 0-9 and A-F is: {(0, 0), (1, 1), ... (15, F)}.
 hexasc:	
 	# $a0 = $a0 & 0xF
 	# if ($a0 > 9) $v0 = $a0 + 0x37
